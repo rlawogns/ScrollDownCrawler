@@ -7,7 +7,7 @@ def crawling():
     browser = webdriver.Chrome()
     browser.maximize_window()
 
-    url = "사용할 url"
+    url = "https://playboard.co/search?q=%EC%9E%AC%ED%85%8C%ED%81%AC&subscribers=10000%3A&sortTypeId=1"
     browser.get(url)
     prev_height = browser.execute_script("return document.body.scrollHeight")
 
@@ -28,7 +28,6 @@ def crawling():
                 break
         else:
             prev_height = browser.execute_script("return document.body.scrollHeight")
-    time.sleep(1200)
     bs = BeautifulSoup(browser.page_source, "html.parser")
     titleList = []
     contentList = []
@@ -70,5 +69,5 @@ def crawling():
             '좋아요 비율': likeNumList, '마지막 업데이트': updateList}
 
     df = pd.DataFrame(data)  ## 데이터프래임 생성
-    df.to_csv('crawling.csv', index=False,encoding='utf-8-sig')
+    df.to_csv('financial.csv', index=False,encoding='utf-8-sig')
     print('complete')
